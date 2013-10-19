@@ -3,7 +3,8 @@
 <head>
 	<title>Frontend Coding Test</title>
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
-	<style type="text/css" media="screen" title="no title" charset="utf-8">
+	<link type="text/css" rel="stylesheet" href="../css/animacoes.css" />
+	<style type="text/css">
 		.picture {
 			background-color: #F9F9F9;
 			border: 1px solid #CCCCCC; padding: 3px;
@@ -29,8 +30,6 @@
 	}
       ul#tabs li { 
 	  	display: inline; 
-	}
-      ul#tabs li a { 
 	  	color: #42454a; 
 		background-color: #dedbde; 
 		border: 1px solid #c9c3ba; 
@@ -44,14 +43,17 @@
 		border-top-left-radius: 2px;
 		border-top-right-radius: 2px; 
 	}
-      ul#tabs li a:hover { 
+      ul#tabs li:hover { 
 	  	background-color: #f1f0ee; 
 	}
-      ul#tabs li a.selected { 
+      ul#tabs li.selected { 
 	  	color: #000; 
 		background-color: #f1f0ee; 
 		font-weight: bold; 
 		padding: 10px 5px 6px 5px; 
+	}
+      ul#tabs li.unselected { 
+		background-color: #dedbde; 
 	}
       div.tabContent { 
 	  	border: 1px solid #c9c3ba; 
@@ -62,155 +64,41 @@
 		-o-border-radius:2px; 
 		background-color: #f1f0ee;
 		height:100px;
-		animation:show 2s;
-		-moz-animation:show 2s;
-		-webkit-animation:show 2s;
-		-o-animation:show 2s;
 		background-repeat:no-repeat;
 		background-position:-100px 0;
+		overflow:hidden;
+		animation:show 1s;
+		-moz-animation:show 1s;
+		-webkit-animation:show 1s;
+		-o-animation:show 1s;
 	}
-      div.tabContent.hide { 
+      div.tabContentHide { 
 	  	display: none; 
 		overflow:hidden;
 	}
-	 
-	@keyframes show
-{
-0%   {
-	height:1px;
-}
-75% {
-	background-image:url(../img/back.png);
-	background-position:-100px 0;
-	height:100px;
-}
-100% {
-	background-image:url(../img/back.png);
-	background-position:110% 0;
-}
-}
-	 
-	@-webkit-keyframes show
-{
-0%   {
-	height:1px;
-}
-75% {
-	background-image:url(../img/back.png);
-	background-position:-100px 0;
-	height:100px;
-}
-100% {
-	background-image:url(../img/back.png);
-	background-position:110% 0;
-}
-}
-	 
-	@-moz-keyframes show
-{
-0%   {
-	height:1px;
-}
-75% {
-	background-image:url(../img/back.png);
-	background-position:-100px 0;
-	height:100px;
-}
-100% {
-	background-image:url(../img/back.png);
-	background-position:110% 0;
-}
+	</style>
+	<script src="../js/java.js"></script>
+    <script language="javascript" type="text/javascript">
+	// variaveis
+	var tabLinks = ["tabBut1", "tabBut2", "tabBut3"];
+	var tabCont = ["tab1", "tab2", "tab3"];
+	var activeBox = "selected"
+	var deactivatedBox = "unselected"
+	var showDiv = "tabContent"
+	var hideDiv = "tabContentHide"
+	var numTabs = 3;
+	
+function tabbedContent() {
+	
+	for (i=1; i<=numTabs; i++){
+        tabButtons = document.getElementById("tabBut"+i);
+		tabButtons.onclick = showTab;
+	}
 }
 
-@-o-keyframes show
-{
-0%   {
-	height:1px;
-}
-75% {
-	background-image:url(../img/back.png);
-	background-position:-100px 0;
-	height:100px;
-}
-100% {
-	background-image:url(../img/back.png);
-	background-position:110% 0;
-}
-}
-    </style>
-
-    <script type="text/javascript">
-    
-    var tabLinks = new Array();
-    var contentDivs = new Array();
-
-    function init() {
-
-      // Pega o conteudo dos links e das divs
-      var tabListItems = document.getElementById('tabs').childNodes;
-    for ( var i = 0; i < tabListItems.length; i++ ) {
-      if ( tabListItems[i].nodeName == "LI" ) {
-        var tabLink = getFirstChildWithTagName( tabListItems[i], 'A' );
-        var id = getHash( tabLink.getAttribute('href') );
-        tabLinks[id] = tabLink;
-        contentDivs[id] = document.getElementById( id );
-      }
-    }
-
-      // Aplica uma função para que as abas possam ser clicadas e ocorra um evento e deixa em destaque
-      var i = 0;
-
-    for(var id in tabLinks){
-      tabLinks[id].onclick = showTab;
-      tabLinks[id].onfocus = function() { this.blur() };
-      if ( i == 0 ) tabLinks[id].className = 'selected';
-      i++;
-    }
-
-      // Deixa apenas a primeira div aparecendo
-      var i = 0;
-
-    for(var id in contentDivs){
-      if(i != 0)contentDivs[id].className = 'tabContent hide';
-      i++;
-    }
-    }
-
-    function showTab(){
-      var selectedId = getHash(this.getAttribute('href'));
-
-      // Destaca a aba selecionada e esconde as outras
-      // Também mostra o conteudo da selecionada e esconde os outros
-    for( var id in contentDivs ){
-    if( id == selectedId ){
-      tabLinks[id].className = 'selected';
-      contentDivs[id].className = 'tabContent';
-	  
-    }else{
-      tabLinks[id].className = '';
-      contentDivs[id].className = 'tabContent hide';
-    }
-    }
-
-      // Evita que o browser redirecione para o link
-      return false;
-    }
-
-    function getFirstChildWithTagName(element, tagName){
-      for( var i = 0; i < element.childNodes.length; i++ ){
-      if( element.childNodes[i].nodeName == tagName) return element.childNodes[i];
-    }
-    }
-
-    function getHash(url){
-      var hashPos = url.lastIndexOf ('#');
-      return url.substring(hashPos + 1);
-    }
-
-    //]]>
     </script>
 </head>
-<body onload="init()">	
+<body onLoad="tabbedContent()">	
 	<div id="headwrap">
 		<div class="head">
 			<div class="logo">Riot Games</div>
@@ -233,40 +121,34 @@
 		<div id="container">	
 
     <ul id="tabs">
-      <li><a href="#tab1">Tab 1</a></li>
-      <li><a href="#tab2">Tab 2</a></li>
-      <li><a href="#tab3">Tab 3</a></li>
+      <li id="tabBut1" class="selected">Tab 1</a></li>
+      <li id="tabBut2">Tab 2</a></li>
+      <li id="tabBut3">Tab 3</a></li>
 
     </ul>
 
     <div class="tabContent" id="tab1">
-      <h3>Tab 1</h3>
-      <div>
+      	<h3>Tab 1</h3>
         <p>Gingerbread muffin gummies gingerbread macaroon. Lollipop candy applicake toffee faworki. Bear claw topping jelly toffee toffee powder tiramisu candy chupa chups. Chupa chups dragee icing applicake chupa chups dessert. Croissant jelly faworki marzipan tootsie roll marshmallow. Marshmallow toffee sweet roll fruitcake.</p>
-      </div>
-
     </div>
 
-    <div class="tabContent" id="tab2">
-      <h3>Tab 2</h3>
-      <div>
+    <div class="tabContentHide" id="tab2">
+      	<h3>Tab 2</h3>
         <p>
 				Chocolate faworki croissant brownie halvah macaroon gummi bears wypas. Chupa chups icing gummies pudding dessert carrot cake. Cupcake jelly beans sweet roll icing ice cream apple pie tootsie roll gummi bears marzipan. Brownie gummies chupa chups pie. Cupcake jujubes topping. 
 			</p>
-      </div>
-
     </div>
 
-    <div class="tabContent" id="tab3">
-      <h3>Tab 3</h3>
-      <div>
+    <div class="tabContentHide" id="tab3">
+      	<h3>Tab 3</h3>
         <p>
 				Cheesecake jelly beans ice cream lollipop sweet pastry. Chupa chups dessert cheesecake sesame snaps. Cookie ice cream candy canes pastry cake muffin. Icing chocolate sweet gummi bears powder oat cake oat cake lemon drops.
 			</p>
-      </div>
     </div>
-		</div>
-			</div>  
+    
+</div>
+        
 	</div>
+    <div id="demo" style="width:100px; height:100px; background-color:#00F; opacity:0;">asd</div>
 </body>
 </html>
