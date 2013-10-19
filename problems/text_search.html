@@ -3,28 +3,17 @@
 <head>
 	<title>Frontend Coding Test | Text Search</title>
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
+	<script src="../js/java.js"></script>
     <script language="javascript" type="text/javascript">
-	function placeOrder() {
-        var varInput = document.getElementById("searchInput").value;
-		var divValue = document.getElementById("searchText").textContent;
-		
-		
-		
-		if(varInput == ""){
-			document.getElementById("searchTextResult").innerHTML=divValue;
-			document.getElementById("searchResult").innerHTML = "Found 0 occurances of the word \"\" in the below text.";
-		}else{
-			var n=divValue.replace(new RegExp(varInput,"g"), "<span style=\"background-color:#FF0000;\">"+ varInput +"<\/span>");
-			document.getElementById("searchTextResult").innerHTML=n;
-			document.getElementById("searchResult").innerHTML = "Found " + (divValue.split(varInput).length - 1) + " occurances of the word \"" + varInput + "\" in the below text.";
-		}
-		
-		
-		document.getElementById('search').onsubmit = function() {
-   			return false;
-		}
-   			return false;
-    }
+	var inputBox = "searchInput";
+	var contentText = "searchText";
+	var resultBox = "searchResult";
+	var resultTextBox = "searchTextResult";
+	var formId = "search";
+	
+	function textSearch() {
+			typeSearch();
+	}
 </script>
 </head>
 <body>
@@ -51,8 +40,8 @@
 
 	<h2>Search</h2>
 	<form id="search">
-  <input type="text" id="searchInput" placeholder="Busca" onkeyup="placeOrder();" autocomplete="off" />
-  <input type="submit" value="Search" onClick="placeOrder(this.form);" />
+  <input type="text" id="searchInput" placeholder="Busca" onkeyup="textSearch();" autocomplete="off" />
+  <input type="submit" value="Search" onClick="textSearch(this.form);" />
 </form>
 
 	<h3>Results</h3>
