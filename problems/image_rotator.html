@@ -3,9 +3,8 @@
 <head>
 	<title>Frontend Coding Test</title>
 	<link type="text/css" rel="stylesheet" href="../css/style.css" />
-	<style type="text/css" media="screen" title="no title" charset="utf-8">
-		
-	#rotator {
+	<style type="text/css">
+		#rotator {
 		width: 450px;
 		height: 266px;
 		overflow:hidden;
@@ -24,120 +23,53 @@
 	}
 	#infoContent {
 		width:430px;
-		height:57px;
+		height:52px;
 		background-color:rgba(0, 0, 0, 0.8);
-		padding:5px 10px 5px 10px;
+		padding:10px 10px 5px 10px;
 		color:#FFF;
 		margin-top:-70px;
 		position:relative;
 	  	font-size: 12px; 
-		border-radius:5px;
-		-moz-border-radius:5px;
-		-webkit-border-radius:5px;
-		-o-border-radius:5px;
-		font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif; 
+		-webkit-border-bottom-right-radius: 5px;
+		-webkit-border-bottom-left-radius: 5px;
+		-moz-border-radius-bottomright: 5px;
+		-moz-border-radius-bottomleft: 5px;
+		border-bottom-right-radius: 5px;
+		border-bottom-left-radius: 5px;
+		font-size:10px;
+		font-family: 'Lucida Grande', Verdana, Arial, Sans-Serif;
+		opacity:0;
+	}
+	p {
+		padding-left:5px;
 	}
 	h4 {
 		margin:0;
 		padding:0 0 0 5px;
 	}
-	@keyframes show
-{
-0%   {
-	opacity:0.0;
-	filter:alpha(opacity=0);
-}
-100% {
-	opacity:1.0;
-	filter:alpha(opacity=100);
-}
-}
-	@-o-keyframes show
-{
-0%   {
-	opacity:0.0;
-	filter:alpha(opacity=0);
-}
-100% {
-	opacity:1.0;
-	filter:alpha(opacity=100);
-}
-}
-	@-moz-keyframes show
-{
-0%   {
-	opacity:0.0;
-	filter:alpha(opacity=0);
-}
-100% {
-	opacity:1.0;
-	filter:alpha(opacity=100);
-}
-}
-	@-webkit-keyframes show
-{
-0%   {
-	opacity:0.0;
-	filter:alpha(opacity=0);
-}
-100% {
-	opacity:1.0;
-	filter:alpha(opacity=100);
-}
-}
-
-
+	ul {
+		list-style:none;
+		padding: 0; 
+		margin: 0;
+	}
 	</style>
+	<script src="../js/java.js"></script>
     <script language="javascript" type="text/javascript">
-
- var contentAreas = 4; // Número total de imagens
- var contentIndex = 1; // Controle de qual conteudo está sendo exibido
- var changeDelay = 3000; // Tempo de delay
-
- function rotateContent(){ 
- 
-	 var contentAreaID = 'contentArea' + contentIndex;
- 
 	
-// Condição que retorna ao inicio ou vai para o próximo conteudo
- if (contentIndex == contentAreas){
- 	contentIndex = 1;
-	contentIndexLast = 4;
- var changeDelay = 4000; // Tempo de delay
- }else{
- 	contentIndex = contentIndex + 1;
-	contentIndexLast = contentIndex - 1;
- var changeDelay = 4000; // Tempo de delay
- }
-	
- 	contentAreaIDLast = 'contentArea' + contentIndexLast;
- 	contentAreaID = 'contentArea' + contentIndex;
-	
-	
- 	document.getElementById(contentAreaIDLast).setAttribute('style','display: none');
-	
-	
- 	document.getElementById(contentAreaID).setAttribute('style','display: inline; animation:show 2s; -moz-animation:show 2s; -o-animation:show 2s; -webkit-animation:show 2s;');
- 	setTimeout("rotateContent()",changeDelay);
- 
-
- }
- 
- // Executa a função
-
- function rotationStart() {
-
-
- 	setTimeout("rotateContent()",changeDelay);
- 
-
- }
-
- 
-
-</script>
+	// variaveis
+		var contentBox = "limiter";
+		var limitCont = "rotator";
+		var infoBox = "infoContent";
+		var loop = true;
+		var delayTime = 3000;
+		
+	// Função que faz a animação
+		function myFunc(){
+			setTimeout("doAnim()",delayTime);
+	}
+    </script>
 </head>
-<body onload="rotationStart()">
+<body onLoad="myFunc()">
 	<div id="headwrap">
 	<div class="head">
 		<div class="logo">Riot Games</div>
@@ -173,48 +105,51 @@
 	<img src="../img/kat_4.jpg" /><br/>
 
 	<hr/>
-
+<!-- Conteudo do rotator / limitador -->
 	<div id="rotator">
-    
     <div id="limiter">
-
-<div id="contentArea1" style="width: 300px; display:inline; position:relative;">
+<ul>
+<!-- Content 1 -->
+<li>
 	<img src="../img/kat_1.jpg" />
-	<div id="infoContent">
+	<div id="infoContent" style="opacity:1;">
 		<h4>Katarina</h4>
 		<p>Fruitcake bonbon donut jelly-o brownie biscuit marzipan pie.</p>
 	</div>
-</div>
-
-<div id="contentArea2" style="width: 300px; display:none; position:relative;">
+</li>
+<!-- Fim content 1 -->
+<!-- Content 2 -->
+<li>
 	<img src="../img/kat_2.jpg" />
 	<div id="infoContent">
 		<h4>Red Card Katarina</h4>
 		<p>Cheesecake marzipan cupcake biscuit candy canes pudding.</p>
     </div>
-</div>
-
-<div id="contentArea3" style="width: 300px; display:none; position:relative;">
+</li>
+<!-- Fim content 2 -->
+<!-- Content 3 -->
+<li>
 	<img src="../img/kat_3.jpg" />
 	<div id="infoContent">
 		<h4>Kitty Cat Katarina</h4>
 		<p>Applicake topping halvah lemon drops wypas cotton candy.</p>
     </div>
-</div>
-
-<div id="contentArea4" style="width: 300px; display:none; position:relative;">
+</li>
+<!-- Fim content 3 -->
+<!-- Content 4 -->
+<li>
 	<img src="../img/kat_4.jpg" />
 	<div id="infoContent">
     	<h4>High Command Katarina</h4>
 		<p>Oat cake macaroon souffle cupcake chupa chups chocolate bar bear claw dragee lemon drops.</p>
     </div>
+</li>
+<!-- Fim content 4 -->
+</ul>
+	</div>
+	</div>
+<!-- Fim Conteudo -->
+    
 </div>
-
-</div>
-
-</div>
-
-</div>
-
 </body>
 </html>
