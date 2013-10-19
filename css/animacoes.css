@@ -1,0 +1,63 @@
+@keyframes show
+{
+0%   {
+	color:#FFF;
+	height:100px;
+}
+25%  {
+	color:#FFF;
+	height:1px;
+}
+100% {
+	color:#000;
+	height:100px;
+}
+}
+	 
+	@-webkit-keyframes show
+{
+0%   {
+	color:#FFF;
+	height:100px;
+}
+25%  {
+	color:#FFF;
+	height:1px;
+}
+100% {
+	color:#000;
+	height:100px;
+}
+}
+	 
+	@-moz-keyframes show
+{
+0%   {
+	color:#FFF;
+	height:100px;
+}
+25%  {
+	color:#FFF;
+	height:1px;
+}
+100% {
+	color:#000;
+	height:100px;
+}
+}
+
+@-o-keyframes show
+{
+0%   {
+	color:#FFF;
+	height:100px;
+}
+25%  {
+	color:#FFF;
+	height:1px;
+}
+100% {
+	color:#000;
+	height:100px;
+}
+}
